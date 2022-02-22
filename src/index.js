@@ -1,4 +1,4 @@
-import oneFunc from './modules/one';
+import timer from './modules/timer';
 import twoFunc from './modules/two';
-oneFunc();
-twoFunc();
+
+timer('25 februar 2022');
