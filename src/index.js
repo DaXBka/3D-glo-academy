@@ -4,7 +4,7 @@ import modal from './modules/modal';
 import scroll from './modules/scroll';
 import calculator from './modules/calculator';
 
-timer('28 februar 2022');
+timer('3 march 2022');
 menu();
 modal();
 scroll();
