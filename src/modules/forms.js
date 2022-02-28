@@ -42,9 +42,14 @@ const formValidation = () => {
                         input.getAttribute('name') === 'user_message') &&
                     input.value
                 ) {
-                    input.value =
-                        input.value[0].toUpperCase() +
-                        input.value.substring(1).toLowerCase();
+                    input.value = input.value
+                        .split(' ')
+                        .map(item => {
+                            return (item =
+                                item[0].toUpperCase() +
+                                item.substring(1).toLowerCase());
+                        })
+                        .join(' ');
                 }
                 input.value = input.value
                     .replace(/\-+/g, '-')
