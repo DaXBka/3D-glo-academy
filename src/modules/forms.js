@@ -31,6 +31,23 @@ const formValidation = () => {
                 }
             });
             input.addEventListener('blur', () => {
+                switch (input.getAttribute('name')) {
+                    case 'user_name':
+                        input.value = input.value.replace(/\d/g, '');
+                        break;
+                    case 'user_email':
+                        input.value = input.value.replace(
+                            /[^A-z0-9\@\_\.\!\~\*\-\']/g,
+                            ''
+                        );
+                        break;
+                    case 'user_phone':
+                        input.value = input.value.replace(/[^\d\)\()-]/g, '');
+                        break;
+                    case 'user_message':
+                        input.value = input.value.replace(/[^А-я -]/g, '');
+                        break;
+                }
                 if (
                     input.getAttribute('type') === 'text' ||
                     input.getAttribute('name') === 'user_message'
