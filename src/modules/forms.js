@@ -10,47 +10,37 @@ const formValidation = () => {
     const form3 = document.getElementById('form3');
 
     const correctForm = form => {
-        form.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', () => {
-                switch (input.getAttribute('name')) {
+        const fixInputValue = val => {
+            if (val.value) {
+                switch (val.getAttribute('name')) {
                     case 'user_name':
-                        input.value = input.value.replace(/\d/, '');
+                        val.value = val.value.replace(/[^A-zА-я ]/g, '');
                         break;
                     case 'user_email':
-                        input.value = input.value.replace(
-                            /[^A-z0-9\@\_\.\!\~\*\-\']/,
-                            ''
-                        );
-                        break;
-                    case 'user_phone':
-                        input.value = input.value.replace(/[^\d\)\()-]/, '');
-                        break;
-                    case 'user_message':
-                        input.value = input.value.replace(/[^А-я -]/, '');
-                        break;
-                }
-            });
-            input.addEventListener('blur', () => {
-                switch (input.getAttribute('name')) {
-                    case 'user_name':
-                        input.value = input.value.replace(/\d/g, '');
-                        break;
-                    case 'user_email':
-                        input.value = input.value.replace(
+                        val.value = val.value.replace(
                             /[^A-z0-9\@\_\.\!\~\*\-\']/g,
                             ''
                         );
                         break;
                     case 'user_phone':
-                        input.value = input.value.replace(/[^\d\)\()-]/g, '');
+                        val.value = val.value.replace(/[^\d\)\(\-]/g, '');
                         break;
                     case 'user_message':
-                        input.value = input.value.replace(/[^А-я -]/g, '');
+                        val.value = val.value.replace(/[^А-я \-\.\,\?\!]/g, '');
                         break;
                 }
+            }
+        };
+        form.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                fixInputValue(input);
+            });
+            input.addEventListener('blur', () => {
+                fixInputValue(input);
                 if (
-                    input.getAttribute('type') === 'text' ||
-                    input.getAttribute('name') === 'user_message'
+                    (input.getAttribute('type') === 'text' ||
+                        input.getAttribute('name') === 'user_message') &&
+                    input.value
                 ) {
                     input.value =
                         input.value[0].toUpperCase() +
@@ -63,7 +53,6 @@ const formValidation = () => {
             });
         });
     };
-
     correctForm(form1);
     correctForm(form2);
     correctForm(form3);
