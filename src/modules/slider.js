@@ -16,7 +16,7 @@ const sliderFunc = (
     let dots;
 
     let currentSlide = 0;
-    let intervalDuration = 1000;
+    let intervalDuration = 4000;
     let idInterval;
 
     let isError = false;
