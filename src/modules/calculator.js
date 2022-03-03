@@ -6,6 +6,8 @@ const calculator = price => {
     const calcDay = document.querySelector('.calc-day');
     const total = document.getElementById('total');
 
+    let id;
+
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
         const calcSquareValue = calcSquare.value;
@@ -30,7 +32,23 @@ const calculator = price => {
             totalValue = 0;
         }
 
-        total.textContent = totalValue;
+        if (totalValue !== 0) {
+            renderTotal(totalValue);
+        }
+    };
+
+    const renderTotal = totalValue => {
+        let numToTotal = parseInt(totalValue * ((totalValue.toString.length + 4) / 10)); // Не с нуля, чтобы долго не ждать подсчета
+        clearInterval(id);
+
+        id = setInterval(() => {
+            numToTotal++;
+            total.textContent = numToTotal;
+            if (numToTotal >= totalValue) {
+                clearInterval(id);
+                total.textContent = totalValue;
+            }
+        }, 1);
     };
 
     calcBlock.addEventListener('input', e => {
