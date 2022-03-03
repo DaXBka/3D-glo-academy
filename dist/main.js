@@ -46,7 +46,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst menu = function () {\r\n    const menu = document.querySelector('menu');\r\n\r\n    document.addEventListener('click', e => {\r\n        if (e.target.closest('.menu') || e.target.matches('menu, li')) {\r\n            menu.classList.add('active-menu');\r\n        } else {\r\n            menu.classList.remove('active-menu');\r\n        }\r\n    });\r\n};\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);\r\n\n\n//# sourceURL=webpack:///./modules/menu.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst menu = function () {\r\n    const menu = document.querySelector('menu');\r\n    const main = document.querySelector('main');\r\n    console.log(main);\r\n\r\n    document.addEventListener('click', e => {\r\n        if (e.target.closest('.menu') || e.target.matches('menu, menu>li')) {\r\n            menu.classList.add('active-menu');\r\n        } else {\r\n            menu.classList.remove('active-menu');\r\n        }\r\n    });\r\n};\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);\r\n\n\n//# sourceURL=webpack:///./modules/menu.js?");
 
 /***/ }),
 
