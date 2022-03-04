@@ -1,3 +1,5 @@
+import { animate } from './helper';
+
 const modal = () => {
     const modal = document.querySelector('.popup');
     const buttons = document.querySelectorAll('.popup-btn');
@@ -7,22 +9,39 @@ const modal = () => {
 
         if (!modal.style.display) {
             modal.style.display = 'block';
+            if (width > 768) {
+                modal.style.opacity = 0;
 
-            if (width > 768) setTimeout(() => (modal.style.opacity = 1), 100);
-            else modal.style.opacity = 1;
+                animate({
+                    duration: 125,
+                    timing(timeFraction) {
+                        return timeFraction;
+                    },
+                    draw(progress) {
+                        modal.style.opacity = progress;
+                    },
+                });
+            }
         } else {
-            modal.style.opacity = 0;
-
-            if (width > 768) setTimeout(() => (modal.style.display = ''), 310);
-            else modal.style.display = '';
+            if (width > 768) {
+                animate({
+                    duration: 125,
+                    timing(timeFraction) {
+                        return timeFraction;
+                    },
+                    draw(progress) {
+                        modal.style.opacity = Math.abs(1 - progress);
+                        if (progress == 1) modal.style.display = '';
+                    },
+                });
+            } else {
+                modal.style.display = '';
+            }
         }
     };
 
     modal.addEventListener('click', e => {
-        if (
-            !e.target.closest('.popup-content') ||
-            e.target.classList.contains('popup-close')
-        ) {
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
             changeDisplay();
         }
     });
@@ -30,9 +49,6 @@ const modal = () => {
     buttons.forEach(btn => {
         btn.addEventListener('click', changeDisplay);
     });
-
-    modal.style.transition = 'opacity 0.3s ease';
-    modal.style.opacity = 0;
 };
 
 export default modal;
