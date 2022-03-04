@@ -34,15 +34,19 @@ const calculator = price => {
 
         if (totalValue !== 0) {
             renderTotal(totalValue);
+        } else {
+            total.textContent = 0;
         }
     };
 
     const renderTotal = totalValue => {
-        let numToTotal = parseInt(totalValue * ((totalValue.toString.length + 4) / 10)); // Не с нуля, чтобы долго не ждать подсчета
+        let numToTotal = parseInt(totalValue * ((totalValue.toString.length + 4) / 10));
+        let stepNum = totalValue.toString().length > 3 ? 10 ** (totalValue.toString().length - 3) : 1;
+
         clearInterval(id);
 
         id = setInterval(() => {
-            numToTotal++;
+            numToTotal += stepNum;
             total.textContent = numToTotal;
             if (numToTotal >= totalValue) {
                 clearInterval(id);
