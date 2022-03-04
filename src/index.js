@@ -7,6 +7,18 @@ import formValidation from './modules/forms';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 
+const sliderClasses = {
+    sliderClass: '.portfolio-content',
+    sliderItemClass: '.portfolio-item',
+    dotsClassBlock: '.portfolio-dots',
+    dotsClass: '.dot',
+    arrowLeft: '#arrow-left',
+    arrowRight: '#arrow-right',
+    arrowsClass: '.portfolio-btn',
+    sliderItemActive: '.portfolio-item-active',
+    dotActive: '.dot-active',
+};
+
 timer('5 march 2022');
 menu();
 modal();
@@ -14,4 +26,4 @@ scroll();
 calculator();
 formValidation();
 tabs();
-slider('.portfolio-content', '.portfolio-item');
+slider(sliderClasses);
