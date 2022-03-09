@@ -1,3 +1,5 @@
+import { animate } from './helper';
+
 const calculator = price => {
     const calcBlock = document.querySelector('.calc-block');
     const calcType = document.querySelector('.calc-type');
@@ -6,11 +8,9 @@ const calculator = price => {
     const calcDay = document.querySelector('.calc-day');
     const total = document.getElementById('total');
 
-    let id;
-
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
-        const calcSquareValue = calcSquare.value;
+        const calcSquareValue = +calcSquare.value;
 
         let totalValue = 0;
         let calcCountValue = 1;
@@ -40,19 +40,16 @@ const calculator = price => {
     };
 
     const renderTotal = totalValue => {
-        let numToTotal = parseInt(totalValue * ((totalValue.toString.length + 4) / 10));
-        let stepNum = totalValue.toString().length > 3 ? 10 ** (totalValue.toString().length - 3) : 1;
-
-        clearInterval(id);
-
-        id = setInterval(() => {
-            numToTotal += stepNum;
-            total.textContent = numToTotal;
-            if (numToTotal >= totalValue) {
-                clearInterval(id);
-                total.textContent = totalValue;
-            }
-        }, 1);
+        animate({
+            duration: 750,
+            timing(timeFraction) {
+                return timeFraction;
+            },
+            draw(progress) {
+                total.textContent = Math.floor(totalValue * progress);
+            },
+        });
+        total.textContent = totalValue;
     };
 
     calcBlock.addEventListener('input', e => {
