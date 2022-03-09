@@ -1,13 +1,13 @@
 const sliderFunc = ({
-    sliderClass,
-    sliderItemClass,
-    dotsClassBlock,
-    dotsClass,
-    arrowLeft,
-    arrowRight,
-    arrowsClass,
-    sliderItemActive,
-    dotActive,
+    sliderClass = '.portfolio-content',
+    sliderItemClass = '.portfolio-item',
+    dotsClassBlock = '.portfolio-dots',
+    dotsClass = '.dot',
+    arrowLeft = '#arrow-left',
+    arrowRight = '#arrow-right',
+    arrowsClass = '.portfolio-btn',
+    sliderItemActive = '.portfolio-item-active',
+    dotActive = '.dot-active',
 }) => {
     const sliderBlock = document.querySelector(sliderClass);
     const slides = document.querySelectorAll(sliderItemClass);
