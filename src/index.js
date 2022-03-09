@@ -7,6 +7,7 @@ import formValidation from './modules/forms';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import { swiperFunc } from './modules/swiperSlider';
+import { sendForm } from './modules/sendForm';
 
 timer('10 march 2022');
 menu();
@@ -27,3 +28,21 @@ slider({
     dotActive: '.dot-active',
 });
 swiperFunc();
+sendForm({
+    formId: 'form1',
+    url: 'https://jsonplaceholder.typicode.com/posts',
+    someElem: [
+        {
+            type: 'block',
+            id: 'total',
+        },
+    ],
+});
+sendForm({
+    formId: 'form2',
+    url: 'https://jsonplaceholder.typicode.com/posts',
+});
+sendForm({
+    formId: 'form3',
+    url: 'https://jsonplaceholder.typicode.com/posts',
+});

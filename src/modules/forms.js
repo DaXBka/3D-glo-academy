@@ -15,13 +15,13 @@ const formValidation = () => {
             if (val.value) {
                 switch (val.getAttribute('name')) {
                     case 'user_name':
-                        val.value = val.value.replace(/[^A-zА-я ]/g, '');
+                        val.value = val.value.replace(/[^А-я ]/g, '');
                         break;
                     case 'user_email':
                         val.value = val.value.replace(/[^A-z0-9\@\_\.\!\~\*\-\']/g, '');
                         break;
                     case 'user_phone':
-                        val.value = val.value.replace(/[^\d\)\(\-]/g, '');
+                        val.value = val.value.replace(/[^\d\)\(\-\+]/g, '');
                         break;
                     case 'user_message':
                         val.value = val.value.replace(/[^А-я \-\.\,\?\!]/g, '');
