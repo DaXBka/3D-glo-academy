@@ -12,7 +12,7 @@ timer('10 march 2022');
 menu();
 modal();
 scroll();
-calculator();
+calculator(100);
 formValidation();
 tabs();
 slider({
