@@ -6,6 +6,7 @@ import calculator from './modules/calculator';
 import formValidation from './modules/forms';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
+import { swiperFunc } from './modules/swiperSlider';
 
 timer('10 march 2022');
 menu();
@@ -25,3 +26,4 @@ slider({
     sliderItemActive: '.portfolio-item-active',
     dotActive: '.dot-active',
 });
+swiperFunc();
