@@ -8,11 +8,9 @@ const calculator = price => {
     const calcDay = document.querySelector('.calc-day');
     const total = document.getElementById('total');
 
-    let id;
-
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
-        const calcSquareValue = calcSquare.value;
+        const calcSquareValue = +calcSquare.value;
 
         let totalValue = 0;
         let calcCountValue = 1;

@@ -1,14 +1,14 @@
-const sliderFunc = (
-    sliderClass,
-    sliderItemClass,
-    dotsClass = '.dot',
+const sliderFunc = ({
+    sliderClass = '.portfolio-content',
+    sliderItemClass = '.portfolio-item',
     dotsClassBlock = '.portfolio-dots',
+    dotsClass = '.dot',
     arrowLeft = '#arrow-left',
     arrowRight = '#arrow-right',
     arrowsClass = '.portfolio-btn',
-    sliderItemActive,
-    dotActive
-) => {
+    sliderItemActive = '.portfolio-item-active',
+    dotActive = '.dot-active',
+}) => {
     const sliderBlock = document.querySelector(sliderClass);
     const slides = document.querySelectorAll(sliderItemClass);
     const dotsBlock = document.querySelector(dotsClassBlock);
@@ -27,11 +27,11 @@ const sliderFunc = (
     if (!sliderBlock || !slides) return;
 
     const prevSlide = (list, i, activeClass) => {
-        list[i].classList.remove(activeClass);
+        list[i].classList.remove(activeClass.substring(1));
     };
 
     const nextSlide = (list, i, activeClass) => {
-        list[i].classList.add(activeClass);
+        list[i].classList.add(activeClass.substring(1));
     };
 
     const autoSlide = () => {
@@ -112,7 +112,7 @@ const sliderFunc = (
         });
 
         dots = document.querySelectorAll(dotsClass);
-        dots[0].classList.add(dotActive);
+        dots[0].classList.add(dotActive.substring(1));
     };
 
     repairDots();
