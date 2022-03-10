@@ -15,4 +15,8 @@ const animate = ({ timing, draw, duration }) => {
     });
 };
 
-export { animate };
+const preloader = () => {
+    // В разработке
+};
+
+export { animate, preloader };

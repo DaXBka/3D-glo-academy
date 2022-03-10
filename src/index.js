@@ -9,7 +9,7 @@ import slider from './modules/slider';
 import { swiperFunc } from './modules/swiperSlider';
 import { sendForm } from './modules/sendForm';
 
-timer('10 march 2022');
+timer('23 march 2022');
 menu();
 modal();
 scroll();

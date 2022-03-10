@@ -1,43 +1,18 @@
+import { preloader } from './helper';
+
 export const sendForm = ({ formId, url, someElem = [] }) => {
     const form = document.getElementById(formId);
-    const formInputs = form.querySelectorAll('input');
+
+    preloader(); // В разработке
+
+    // = = = = = = = = = = = = = = = =
 
     const loadText = 'Загрузка...';
     const errorText = 'Произошла ошибка.';
     const succesText = 'Спасибо! Наш менеджер свяжется с вами.';
     const uncorrectText = 'Неверный формат введенных данных.';
 
-    let statusBlock = document.createElement('div');
-    let statusTextBlock = document.createElement('div');
-
-    const preloader = () => {
-        statusBlock.style.cssText = `
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.3);
-            width: 100vw;
-            height: 100vh;
-            z-index: 99999;
-    `;
-
-        statusTextBlock.textContent = loadText;
-        statusTextBlock.style.cssText = `
-            border: 4px solid lightgrey;
-            box-shadow: 0px 0px 43px 9px rgba(227, 227, 227, 0.78);
-            background-color: rgba(255, 255, 255, 1);
-            border-radius: 35px;
-            padding: 15px 30px;
-            width: 40%;
-            position: relative;
-            top: calc(50% - 30px);
-            color: black;
-            left: calc(50% - 20%);
-    `;
-        statusBlock.append(statusTextBlock);
-        document.body.append(statusBlock);
-    };
+    // = = = = = = = = = = = = = = = =
 
     const sendData = data => {
         return fetch(url, {
@@ -94,13 +69,15 @@ export const sendForm = ({ formId, url, someElem = [] }) => {
         return isCorrect;
     };
 
-    form.addEventListener('submit', e => {
-        e.preventDefault();
+    const submitForm = () => {
+        const statusBlock = document.createElement('div');
+        statusBlock.textContent = loadText;
+        statusBlock.style.color = 'white';
+        statusBlock.style.marginTop = '10px';
+        form.append(statusBlock);
 
         const formData = new FormData(form);
         const formBody = {};
-
-        preloader();
 
         formData.forEach((val, key) => {
             formBody[key] = val;
@@ -118,26 +95,31 @@ export const sendForm = ({ formId, url, someElem = [] }) => {
         if (isCorrectValidate()) {
             sendData(formBody)
                 .then(data => {
-                    statusTextBlock.textContent = succesText;
-                    statusTextBlock.style.borderColor = 'green';
-                    statusTextBlock.style.boxShadow = '0px 0px 43px 9px rgba(129, 255, 107, 0.78)';
+                    statusBlock.textContent = succesText;
+                    const formInputs = form.querySelectorAll('input');
                     formInputs.forEach(input => {
                         input.value = '';
                     });
                 })
                 .catch(error => {
-                    statusTextBlock.textContent = errorText;
-                    statusTextBlock.style.borderColor = 'red';
-                    statusTextBlock.style.boxShadow = '0px 0px 43px 9px rgba(253, 102, 102, 0.78)';
+                    statusBlock.textContent = errorText;
                 });
         } else {
-            statusTextBlock.textContent = uncorrectText;
-            statusTextBlock.style.borderColor = 'red';
-            statusTextBlock.style.boxShadow = '0px 0px 43px 9px rgba(253, 102, 102, 0.78)';
+            statusBlock.textContent = uncorrectText;
         }
-        setTimeout(() => {
-            statusBlock.innerHTML = '';
-            statusBlock.style.display = 'none';
-        }, 3000);
-    });
+        setTimeout(() => statusBlock.remove(), 2500);
+    };
+
+    try {
+        if (!form) {
+            throw new Error('Не найдена форма по ID.');
+        }
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            submitForm();
+        });
+    } catch (error) {
+        console.error(error.message);
+    }
 };
