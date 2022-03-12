@@ -21,6 +21,8 @@ const modal = () => {
                         modal.style.opacity = progress;
                     },
                 });
+            } else {
+                modal.style.opacity = 1;
             }
         } else {
             if (width > 768) {
@@ -36,6 +38,7 @@ const modal = () => {
                 });
             } else {
                 modal.style.display = '';
+                modal.style.opacity = 0;
             }
         }
     };
